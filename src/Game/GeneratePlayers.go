@@ -14,7 +14,7 @@ func GeneratePlayers() []Player {
 	players := make([]Player, len(roles))
 	for i, r := range roles {
 		players[i].role = r
-		players[i].id = i
+		players[i].id = i + 1
 	}
 
 	return players

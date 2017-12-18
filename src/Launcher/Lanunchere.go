@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./Game"
+	"../Game"
 )
 
 func main() {
