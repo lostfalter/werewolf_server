@@ -2,7 +2,7 @@ package game
 
 // HunterOperation view hunter status
 func HunterOperation(players []Player) Player {
-	votes := CollectVote(players)
+	votes := CollectVote(players, players)
 
 	result := GetVoteResult(votes)
 

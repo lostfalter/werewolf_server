@@ -2,7 +2,7 @@ package game
 
 // GuardOperation guard people
 func GuardOperation(players []Player) Player {
-	votes := CollectVote(players)
+	votes := CollectVote(players, players)
 
 	result := GetVoteResult(votes)
 

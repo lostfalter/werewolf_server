@@ -2,7 +2,7 @@ package game
 
 // WolveOperation kill people
 func WolveOperation(players []Player) Player {
-	votes := CollectVote(players)
+	votes := CollectVote(players, players)
 
 	result := GetVoteResult(votes)
 

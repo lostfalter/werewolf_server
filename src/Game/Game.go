@@ -1,21 +1,33 @@
 package game
 
+import (
+	"fmt"
+)
+
 // Start game procedure
 func Start() {
 	players := GeneratePlayers()
 
-	Election(players)
+	var context Context
+	context.alivePlayers = players
+
+	Election(context)
 
 	for !isGameEnd(players) {
 		announcePublicStatus(players)
 
-		Exile(players)
+		context = Exile(context)
 
-		if !isGameEnd(players) {
+		fmt.Println(context.alivePlayers)
+		context = Exile(context)
+
+		if isGameEnd(players) {
 			break
 		}
 
-		nightOperation(players)
+		// nightOperation(players)
+
+		//Exile(context)
 
 		break
 	}
@@ -41,4 +53,10 @@ func isGameEnd(players []Player) bool {
 
 func announcePublicStatus(players []Player) {
 
+}
+
+// Context for game
+type Context struct {
+	alivePlayers []Player
+	deadPlayers  []Player
 }

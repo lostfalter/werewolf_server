@@ -28,7 +28,7 @@ func GetVoteResult(votes []Vote) VoteResult {
 
 	fmt.Println("Vote summary:")
 	for k, v := range voteTable {
-		fmt.Printf("Player %3d <--", k.id)
+		fmt.Printf("Player %2d <--", k.id)
 		for _, v2 := range v {
 			fmt.Printf(" %d", v2.player.id)
 		}
