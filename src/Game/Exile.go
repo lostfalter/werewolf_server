@@ -5,7 +5,7 @@ import (
 )
 
 // Exile procedure
-func Exile(context Context) Context {
+func Exile(context *Context) {
 	players := context.alivePlayers
 
 	fmt.Print("\n-------------\nStart Exile\n")
@@ -45,6 +45,4 @@ func Exile(context Context) Context {
 	context.alivePlayers = players
 
 	fmt.Print("End Exile\n-------------\n")
-
-	return context
 }

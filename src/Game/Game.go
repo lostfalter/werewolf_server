@@ -1,8 +1,6 @@
 package game
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // Start game procedure
 func Start() {
@@ -13,42 +11,56 @@ func Start() {
 
 	Election(context)
 
-	for !isGameEnd(players) {
+	for !isGameEnd(context.alivePlayers) {
 		announcePublicStatus(players)
 
-		context = Exile(context)
+		Exile(&context)
 
-		fmt.Println(context.alivePlayers)
-		context = Exile(context)
-
-		if isGameEnd(players) {
+		if isGameEnd(context.alivePlayers) {
 			break
 		}
 
-		// nightOperation(players)
+		nightOperation(&context)
 
 		//Exile(context)
-
-		break
 	}
 
 }
 
-func nightOperation(players []Player) {
+func nightOperation(context *Context) {
 
-	WolveOperation(players)
+	WolveOperation(context)
 
-	WitchOperation(players)
+	//WitchOperation(context.alivePlayers)
 
-	GuardOperation(players)
+	//GuardOperation(context.alivePlayers)
 
-	FarseerOperation(players)
+	//FarseerOperation(context.alivePlayers)
 
-	HunterOperation(players)
+	//HunterOperation(context.alivePlayers)
 }
 
 func isGameEnd(players []Player) bool {
+	wolveCount := countRole(players, "wolve")
+	if wolveCount > len(players)-wolveCount {
+		fmt.Println("Bad guys win!")
+		return true
+	} else if wolveCount == 0 {
+		fmt.Println("Good guys win!")
+		return true
+	}
 	return false
+}
+
+func countRole(players []Player, name string) int {
+	count := 0
+	for _, p := range players {
+		if p.role.Name == name {
+			count++
+		}
+	}
+
+	return count
 }
 
 func announcePublicStatus(players []Player) {
@@ -59,4 +71,18 @@ func announcePublicStatus(players []Player) {
 type Context struct {
 	alivePlayers []Player
 	deadPlayers  []Player
+}
+
+func (context *Context) GetWolve() []Player {
+	wolves := make([]Player, 0)
+	for _, p := range context.alivePlayers {
+		if p.role.Name == "wolve" {
+			wolves = append(wolves, p)
+		}
+		fmt.Println(p.role.Name)
+	}
+
+	fmt.Println("wolves:")
+	fmt.Println(wolves)
+	return wolves
 }
