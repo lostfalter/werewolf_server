@@ -3,7 +3,7 @@ package game
 // WolveOperation kill people
 func WolveOperation(context *Context) Player {
 
-	votes := CollectVote(context.GetWolve(), context.alivePlayers)
+	votes := CollectVote(context.GetWolve(), context.GetGodGuys())
 
 	result := GetVoteResult(votes)
 
