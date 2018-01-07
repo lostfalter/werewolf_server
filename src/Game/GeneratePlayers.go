@@ -9,12 +9,14 @@ func GeneratePlayers() []Player {
 	var roles = basicConfiguration()
 	roles = shuffle(roles)
 
-	fmt.Println(roles)
-
 	players := make([]Player, len(roles))
 	for i, r := range roles {
 		players[i].role = r
 		players[i].id = i + 1
+	}
+
+	for _, v := range players {
+		fmt.Println(v)
 	}
 
 	return players

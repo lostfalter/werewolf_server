@@ -12,7 +12,7 @@ func main() {
 	good := 0
 	bad := 0
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1; i++ {
 		if game.Start() {
 			good++
 		} else {

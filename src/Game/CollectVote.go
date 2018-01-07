@@ -27,7 +27,7 @@ func getRandomVote(players []Player, targets []Player) []Vote {
 
 	rand.Seed(time.Now().UnixNano())
 
-	fmt.Println("\nOrignal votes:")
+	fmt.Println("\nOriginal votes:")
 
 	for i, v := range votes {
 		v.player = players[i]

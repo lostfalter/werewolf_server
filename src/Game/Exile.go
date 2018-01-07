@@ -36,13 +36,18 @@ func Exile(context *Context) {
 	// 	result = GetVoteResult(votes)
 	// }
 
-	target := result.target[0]
+	if len(result.target) > 0 {
+		target := result.target[0]
 
-	players = RemovePlayer(players, target)
+		players = RemovePlayer(players, target)
 
-	target.status.liveStatus = Dead
-	context.deadPlayers = append(context.deadPlayers, target)
-	context.alivePlayers = players
+		target.status.liveStatus = Dead
+		context.deadPlayers = append(context.deadPlayers, target)
+		context.alivePlayers = players
+	} else {
+		// no body can vote
+		// just end this procedure
+	}
 
 	fmt.Print("End Exile\n-------------\n")
 }

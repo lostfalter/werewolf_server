@@ -64,7 +64,7 @@ type Player struct {
 func (p Player) String() string {
 	// info := fmt.Sprintf("Player\nId: %d\nLive status: %s\nTalk status: %s\n",
 	// 	p.id, p.status.liveStatus.String(), p.status.talkStatus.String())
-	info := fmt.Sprintf("%d", p.id)
+	info := fmt.Sprintf("Player %d: %s", p.id, p.role.String())
 	return info
 }
 
