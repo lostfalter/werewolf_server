@@ -20,9 +20,9 @@ func main() {
 		}
 	}
 
-	fmt.Printf("good rate = %.3f, bad rate = %.3f\n",
-		float64(good)/float64(good+bad),
-		float64(bad)/float64(good+bad))
+	fmt.Printf("good rate = %.3f%%, bad rate = %.3f%%\n",
+		float64(good)/float64(good+bad)*100,
+		float64(bad)/float64(good+bad)*100)
 
 	fmt.Println("Game finished!")
 }

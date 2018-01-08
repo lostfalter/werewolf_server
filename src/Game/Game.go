@@ -12,7 +12,7 @@ func Start() bool {
 	Election(context)
 
 	for isGameEnd(&context) == 3 {
-		announcePublicStatus(players)
+		announcePublicStatus(&context)
 
 		Exile(&context)
 
@@ -24,6 +24,8 @@ func Start() bool {
 
 		//Exile(context)
 	}
+
+	announcePublicStatus(&context)
 
 	return isGameEnd(&context) == 2
 }
@@ -43,8 +45,8 @@ func nightOperation(context *Context) {
 
 func isGameEnd(context *Context) int {
 	players := context.alivePlayers
-	wolveCount := countRole(players, "wolve")
-	citizenCount := countRole(players, "citizen")
+	wolveCount := countRole(players, "wolf")
+	citizenCount := countRole(players, "villager")
 	godCount := len(players) - wolveCount - citizenCount
 	if wolveCount > len(players)-wolveCount ||
 		citizenCount == 0 || godCount == 0 {
@@ -68,8 +70,16 @@ func countRole(players []Player, name string) int {
 	return count
 }
 
-func announcePublicStatus(players []Player) {
+func announcePublicStatus(context *Context) {
+	fmt.Println("alive players:")
+	for _, v := range context.alivePlayers {
+		fmt.Println(v)
+	}
 
+	fmt.Println("dead players:")
+	for _, v := range context.deadPlayers {
+		fmt.Println(v)
+	}
 }
 
 // Context for game
@@ -78,7 +88,7 @@ type Context struct {
 	deadPlayers  []Player
 }
 
-func (context *Context) GetPlayersByRole(name string) []Player {
+func (context *Context) getPlayersByRole(name string) []Player {
 	players := make([]Player, 0)
 	for _, p := range context.alivePlayers {
 		if p.role.Name == name {
@@ -90,15 +100,15 @@ func (context *Context) GetPlayersByRole(name string) []Player {
 }
 
 func (context *Context) GetWolve() []Player {
-	return context.GetPlayersByRole("wolve")
+	return context.getPlayersByRole("wolf")
 }
 
 func (context *Context) GetGodGuys() []Player {
 	players := make([]Player, 0)
-	players = append(players, context.GetPlayersByRole("citizen")...)
-	players = append(players, context.GetPlayersByRole("farseer")...)
-	players = append(players, context.GetPlayersByRole("idiom")...)
-	players = append(players, context.GetPlayersByRole("witch")...)
-	players = append(players, context.GetPlayersByRole("hunter")...)
+	players = append(players, context.getPlayersByRole("villager")...)
+	players = append(players, context.getPlayersByRole("seer")...)
+	players = append(players, context.getPlayersByRole("idiom")...)
+	players = append(players, context.getPlayersByRole("witch")...)
+	players = append(players, context.getPlayersByRole("hunter")...)
 	return players
 }

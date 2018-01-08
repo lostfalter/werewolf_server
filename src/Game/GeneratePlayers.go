@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"math/rand"
 )
 
 // GeneratePlayers generate players
@@ -23,30 +24,36 @@ func GeneratePlayers() []Player {
 }
 
 // shuffle role list
-func shuffle(roles []Role) []Role {
-	return roles
+func shuffle(src []Role) []Role {
+	dest := make([]Role, len(src))
+	perm := rand.Perm(len(src))
+	for i, v := range perm {
+		dest[v] = src[i]
+	}
+
+	return dest
 }
 
 // basicConfiguration baisc twelve people configuration
 func basicConfiguration() []Role {
 	roles := make([]Role, 0)
 
-	wolve := Role{"wolve"}
-	citizen := Role{"citizen"}
-	farseer := Role{"farseer"}
+	wolf := Role{"wolf"}
+	villager := Role{"villager"}
+	seer := Role{"seer"}
 	witch := Role{"witch"}
 	hunter := Role{"hunter"}
 	idiom := Role{"idiom"}
 
 	for i := 0; i < 4; i++ {
-		roles = append(roles, wolve)
+		roles = append(roles, wolf)
 	}
 
 	for i := 0; i < 4; i++ {
-		roles = append(roles, citizen)
+		roles = append(roles, villager)
 	}
 
-	roles = append(roles, farseer)
+	roles = append(roles, seer)
 	roles = append(roles, witch)
 	roles = append(roles, hunter)
 	roles = append(roles, idiom)
